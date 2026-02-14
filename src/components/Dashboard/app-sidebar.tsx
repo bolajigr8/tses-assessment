@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Shield } from 'lucide-react'
 import Image from 'next/image'
 import { GENERAL_NAV_ITEMS, MAIN_NAV_ITEMS } from '@/constants/nav-items'
 
@@ -19,7 +18,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ className }) => {
     >
       {/* Header with Logo */}
       <div className='h-16 flex items-center px-6 border-b border-gray-100'>
-        <Link href='/dashboard' className='flex items-center gap-2.5'>
+        <Link href='/teacher/courses' className='flex items-center gap-2.5'>
           <div className='relative w-30 h-30'>
             <Image
               src='/Soludesks.png'
