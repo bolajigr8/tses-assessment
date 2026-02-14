@@ -2,7 +2,7 @@
 
 🚀 **Live Demo**: [https://tses-assessment-beta.vercel.app/](https://tses-assessment-beta.vercel.app/)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/bolajigr8/tses-assessment)
+[![Click to Preview](https://vercel.com/button)](https://tses-assessment-beta.vercel.app/)
 
 ## Features
 
