@@ -13,7 +13,7 @@ export default function HomePage() {
 
         {/* CTA Button */}
         <Link
-          href='/teacher'
+          href='/teacher/courses'
           className='inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105'
         >
           Go to Dashboard
