@@ -1,36 +1,231 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Course Management System -- Assessment
+
+## Features
+
+### 1. Teacher Dashboard Layout
+
+- Responsive sidebar navigation with collapsible menu
+- Top header with user profile (mock user: Madison Greg - Moderator/Instructor)
+- Mobile-responsive design with hamburger menu
+- Persistent layout across teacher routes
+
+### 2. Course Management (`/teacher/courses`)
+
+- Paginated course grid with search functionality
+- Category-based filtering
+- Course statistics (enrollments, completion rates)
+- Responsive card layout
+
+### 3. Course Detail Page (`/teacher/courses/[id]`)
+
+- Applicant management table
+- View total applicants and active learners
+- Browse through student details
+- Quick navigation to learning interface
+
+### 4. Interactive Learning Interface (`/teacher/courses/[id]/learn`)
+
+- Video player for lesson content
+- Collapsible lesson sidebar with progress tracking
+- Mark lessons as complete
+- Quiz/Assessment view with multiple choice and text questions
+- Content tabs (Course Content / Reviews & Feedback)
+- Auto-navigation to next lesson after completion
+
+### 5. State Management (Redux Toolkit) -- Dummy Users
+
+- Centralized state management using Redux Toolkit
+- **User Slice**: Manages user authentication state
+  - User data structure: `id`, `name`, `email`, `isAuthenticated`
+  - Actions: `setUser`, `clearUser`
+  - Selectors: `selectUser`, `selectIsAuthenticated`
+- Typed Redux hooks (`useAppDispatch`, `useAppSelector`)
+- Provider setup compatible with Next.js App Router
+- TypeScript-first implementation with full type safety
+
+### 6. RTK Query Setup -- Dummy Api Calls
+
+- API integration using RTK Query for efficient data fetching
+- **Configured Endpoints**:
+  - `getCourses` - Fetch list of courses
+  - `getProfile` - Fetch user profile data
+
+- Mock data integration using JSONPlaceholder API
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: Redux Toolkit
+- **Data Fetching**: RTK Query
+- **UI Components**: Custom components + Shadcn Components
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ installed
+- pnpm
+
+### Installation
+
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000] in your browser
 
-## Learn More
+### Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm run build
+pnpm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── teacher/                    # Teacher-specific routes
+│   │   ├── courses/
+│   │   │   ├── [id]/
+│   │   │   │   ┣━ learn/
+│   │   │   │   ┃  └── page.tsx    # Learning interface
+│   │   │   │   └── page.tsx       # Course detail page
+│   │   │   └── page.tsx           # Courses dashboard
+│   │   ├── dashboard/
+│   │   │   └── page.tsx           # Main dashboard
+│   │   ├── layout.tsx             # Teacher layout wrapper
+│   │   └── page.tsx               # Teacher home (redirects to dashboard)
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx                 # Root layout
+│   ├── not-found.tsx
+│   └── page.tsx                   # App home (redirects to teacher)
+├── components/
+│   ├── course/                    # Course-specific components
+│   │   ├── applicant-table.tsx
+│   │   ├── course-card.tsx
+│   │   ├── header.tsx
+│   │   ├── lesson-content.tsx
+│   │   ├── lesson-sidebar.tsx
+│   │   ├── pagination.tsx
+│   │   ├── quiz-view.tsx
+│   │   ├── search-bar.tsx
+│   │   ├── stat-card.tsx
+│   │   └── video-player.tsx
+│   ├── Dashboard/                 # Layout components
+│   │   ├── app-header.tsx         # Top header with user info
+│   │   ├── app-sidebar.tsx        # Sidebar navigation
+│   │   ├── dashboard-layout.tsx   # Main layout wrapper
+│   │   └── mobile-menu.tsx        # Mobile hamburger menu
+│   └── ui/                        # Reusable UI components
+│       ├── button.tsx
+│       ├── input.tsx
+│       ├── safe-image.tsx
+│       ├── separator.tsx
+│       ├── sheet.tsx
+│       ├── sidebar.tsx
+│       ├── skeleton.tsx
+│       └── tooltip.tsx
+├── constants/                     # Data and configuration
+│   ├── courses.ts                 # Course data
+│   ├── data.ts                    # Mock data
+│   ├── nav-items.ts               # Sidebar navigation items
+│   ├── types.ts                   # TypeScript type definitions
+│   └── user.ts                    # User configuration
+├── hooks/
+│   └── use-mobile.ts              # Mobile detection hook
+├── lib/
+│   └── utils.ts                   # Utility functions (cn, etc.)
+└── store/                         # Redux Toolkit setup
+    ├── index.ts                   # Store configuration
+    ├── hooks.ts                   # Typed Redux hooks
+    ├── StoreProvider.tsx          # Redux Provider component
+    ├── api/
+    │   └── apiSlice.ts           # RTK Query API configuration
+    └── slices/
+        └── userSlice.ts          # User state slice
+```
 
-## Deploy on Vercel
+## Route Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Application Flow
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+/teacher (root)
+  └─> redirects to /teacher/dashboard
+
+/teacher
+  ├── /dashboard              # Main dashboard
+  ├── /courses                # Course listing
+  │   └── /[id]              # Course details
+  │       └── /learn         # Learning interface
+  └── page.tsx (redirects to /dashboard)
+```
+
+## Data Management
+
+### Mock Data Location
+
+All mock data is stored in the `constants/` directory:
+
+- **courses.ts**: Course catalog data
+- **data.ts**: Lessons, sections, and content
+- **nav-items.ts**: Sidebar navigation configuration
+- **user.ts**: User profiles
+- **types.ts**: TypeScript interfaces and types
+
+### Navigation Items
+
+Modify `constants/nav-items.ts` to add/remove sidebar links:
+
+```typescript
+{
+  label: 'New Section',
+  icon: IconName,
+  href: '/teacher/new-section',
+}
+```
+
+## Component Highlights
+
+### Safe Image Component
+
+Graceful fallback handling for missing images:
+
+```typescript
+<SafeImage
+  src="/path/to/image.jpg"
+  alt="Description"
+  fallback="/placeholder.jpg"
+/>
+```
+
+### Mobile Detection Hook
+
+```typescript
+const isMobile = useMobile()
+```
+
+### Current Limitations
+
+- Uses mock data (no real backend)
+- Mock user system (no authentication)
+- Progress not persisted (resets on refresh)
+- Video player is UI-only (no actual playback)
+- No real-time updates
+- RTK Query uses JSONPlaceholder for demonstration
+
+**Built with using Next.js, TypeScript, Tailwind CSS, and Redux Toolkit**
